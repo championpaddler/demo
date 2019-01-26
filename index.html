@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pivot Demo</title>
+
+        <!-- external libs from cdnjs -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-basic-latest.min.js"></script>
+
+        <!-- PivotTable.js libs from ../dist -->
+        <link rel="stylesheet" type="text/css" href="https://pivottable.js.org/dist/pivot.css">
+        <script type="text/javascript" src="https://pivottable.js.org/dist/pivot.js"></script>
+        <script type="text/javascript" src="https://pivottable.js.org/dist/export_renderers.js"></script>
+        <script type="text/javascript" src="https://pivottable.js.org/dist/d3_renderers.js"></script>
+        <script type="text/javascript" src="https://pivottable.js.org/dist/plotly_renderers.js"></script>
+
+        <!-- <style>
+            body {font-family: Verdana;}
+            .node {
+              border: solid 1px white;
+              font: 10px sans-serif;
+              line-height: 12px;
+              overflow: hidden;
+              position: absolute;
+              text-indent: 2px;
+            }
+        </style> -->
+
+        <!-- for examples only! script to show code to user -->
+    </head>
+    <body>
+        <script type="text/javascript">
+    // This example has all the renderers loaded,
+    // and should work with touch devices.
+
+    $(function(){
+        var derivers = $.pivotUtilities.derivers;
+        let data=[
+  {
+    "Asset Amount": 1000,
+    "count": 2,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 10000,
+    "count": 4,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 12000,
+    "count": 6,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 4000,
+    "count": 4,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 5000,
+    "count": 2,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 2000,
+    "count": 8,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 11000,
+    "count": 10,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 5000,
+    "count": 14,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 500,
+    "count": 16,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 6500,
+    "count": 15,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 4500,
+    "count": 13,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 2000,
+    "count": 11,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 3200,
+    "count": 9,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 2400,
+    "count": 7,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 1200,
+    "count": 4,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 11000,
+    "count": 3,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 900,
+    "count": 2,
+    "Asset Category": ""
+  },
+  {
+    "Asset Amount": 1100,
+    "count": 1,
+    "Asset Category": ""
+  }
+]
+
+if(data.length!=0)
+{
+    daa(data)
+}
+        var renderers = $.extend(
+            $.pivotUtilities.plotly_renderers,
+            $.pivotUtilities.d3_renderers,
+            $.pivotUtilities.renderers,
+
+            $.pivotUtilities.export_renderers
+            );
+
+       function daa(data) {
+            $("#output").pivotUI(data, {
+                renderers: renderers,
+                derivedAttributes: {
+                    "Range": derivers.bin("Asset Amount",500,100),
+                },
+                cols: ["Range","Assest Amount"],
+                rendererName: "Table Barchart"
+            });
+        }
+     });
+        </script>
+
+
+
+        <div id="output" style="width:500px !important"></div>
+
+    </body>
+</html>
